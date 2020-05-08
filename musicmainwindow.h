@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QObject>
+#include <QPushButton>
+#include <QMediaPlayer>
 
 class MusicMainWindow : public QMainWindow
 {
@@ -10,7 +12,14 @@ class MusicMainWindow : public QMainWindow
 public:
     explicit MusicMainWindow(QWidget *parent = nullptr);
 
+private:
+    QPushButton* m_playBtn;
+    QMediaPlayer* m_player;
+
 signals:
+
+public slots:
+    void play();
 
 };
 

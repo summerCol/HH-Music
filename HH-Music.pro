@@ -7,4 +7,7 @@ SOURCES += \
 HEADERS += \
     musicmainwindow.h
 
+RESOURCES += \
+    pic/res.qrc
+
 

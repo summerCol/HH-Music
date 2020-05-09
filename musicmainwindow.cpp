@@ -1,7 +1,7 @@
 #include "musicmainwindow.h"
 #include <QVBoxLayout>
 
-MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent)
+MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent), m_play(false)
 {
     setMinimumSize(1159, 863);
 
@@ -9,7 +9,10 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent)
     this->setCentralWidget(centralWidget);
 
     auto vBoxLayout = new QVBoxLayout(centralWidget);
-    m_playBtn = new QPushButton(tr("播放"));
+    m_playBtn = new QPushButton(tr(""));
+    m_playBtn->setFixedSize(48,48);
+    m_playBtn->setStyleSheet("QPushButton{ border-image: url(:play.png);"
+                                           "background: transparent; }" );
     vBoxLayout->addStretch(1);
     vBoxLayout->addWidget(m_playBtn);
 
@@ -24,5 +27,19 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent)
 
 void MusicMainWindow::play()
 {
-    m_player->play();
+    if(m_play) //处于播放状态时点击展示暂停图片
+    {
+        m_player->play();
+        m_playBtn->setStyleSheet("QPushButton{ border-image: url(:pause.png);"
+                                               "background: transparent; }" );
+    }
+    else      //处于暂停状态时点击展示播放图片
+    {
+        m_player->pause();
+        m_playBtn->setStyleSheet("QPushButton{ border-image: url(:play.png);"
+                                               "background: transparent; }" );
+    }
+
+
+    m_play = !m_play;
 }

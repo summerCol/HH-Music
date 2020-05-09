@@ -15,6 +15,7 @@ public:
 private:
     QPushButton* m_playBtn;
     QMediaPlayer* m_player;
+    bool m_play;
 
 signals:
 

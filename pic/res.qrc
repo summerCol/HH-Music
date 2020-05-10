@@ -2,5 +2,9 @@
     <qresource prefix="/">
         <file>pause.png</file>
         <file>play.png</file>
+        <file>next.png</file>
+        <file>pre.png</file>
+        <file>recycleMode.png</file>
+        <file>volume.png</file>
     </qresource>
 </RCC>

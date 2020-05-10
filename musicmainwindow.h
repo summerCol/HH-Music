@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QPushButton>
 #include <QMediaPlayer>
+#include <QMouseEvent>
 #include "bottomwidget.h"
 
 class MusicMainWindow : public QMainWindow
@@ -13,10 +14,17 @@ class MusicMainWindow : public QMainWindow
 public:
     explicit MusicMainWindow(QWidget *parent = nullptr);
 
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+
 private:
     QMediaPlayer* m_player;
     BottomWidget* m_bottomWidget;
     bool m_play;
+    bool m_isPress;
+    QPoint m_pressPoint;
 
 signals:
 

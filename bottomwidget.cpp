@@ -21,8 +21,10 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
     hLayout->addWidget(m_volumeBtn);
     hLayout->addStretch(1);
 
-    QPalette palette(QColor(50, 8, 85));
-    this->setPalette(palette);
+//    QPalette palette(QColor(50, 8, 85));
+//    this->setPalette(palette);
+    this->setObjectName("bottomwidget");
+    this->setStyleSheet("QWidget#bottomwidget { background-color: rgb(50, 8, 85) }"); //这里不知道为什么添加到主窗口中背景色样式就不见了
 
 
     m_playBtn->setFixedSize(48,48);

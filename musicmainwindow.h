@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QPushButton>
 #include <QMediaPlayer>
+#include "bottomwidget.h"
 
 class MusicMainWindow : public QMainWindow
 {
@@ -13,8 +14,8 @@ public:
     explicit MusicMainWindow(QWidget *parent = nullptr);
 
 private:
-    QPushButton* m_playBtn;
     QMediaPlayer* m_player;
+    BottomWidget* m_bottomWidget;
     bool m_play;
 
 signals:

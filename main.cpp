@@ -8,10 +8,10 @@ int main(int argc, char** argv)
 {
     QApplication a(argc, argv);
 
-//    MusicMainWindow musicMainWindow;
-//    musicMainWindow.show();
-    BottomWidget btw;
-    btw.show();
+    MusicMainWindow musicMainWindow;
+    musicMainWindow.show();
+//    BottomWidget btw;
+//    btw.show();
 
     return a.exec();  //开启应用事件循环
 }

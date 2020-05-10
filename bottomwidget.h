@@ -14,7 +14,7 @@ public:
 
 signals:
 
-private:
+public:
     QPushButton* m_playBtn;
     QPushButton* m_preBtn;
     QPushButton* m_nextBtn;

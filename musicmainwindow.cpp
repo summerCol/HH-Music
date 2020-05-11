@@ -25,6 +25,7 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
 
     hMainLayout->addWidget(m_leftWidget);
     hMainLayout->addLayout(vBoxLayout);
+    hMainLayout->setMargin(0); //调整主布局的外边距
 
     m_player = new QMediaPlayer;
     //connect(m_player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));

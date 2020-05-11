@@ -13,7 +13,7 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
     m_nextBtn  = new QPushButton();
     m_volumeBtn  = new QToolButton();
 
-    hLayout->addStretch(1);
+    //hLayout->addStretch(1); //这一行没注释掉中间几个按钮会偏右边（但是没添加左边Widget的时候不会，刚好是居中的）
     hLayout->addWidget(m_recycleBtn);
     hLayout->addWidget(m_preBtn);
     hLayout->addWidget(m_playBtn);

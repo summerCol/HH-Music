@@ -1,23 +1,30 @@
 #include "musicmainwindow.h"
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QDebug>
 
 MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
                                                     m_play(false), m_isPress(false), m_pressPoint(QPoint(0, 0))
 {
-    setMinimumSize(1159, 863);
+    setMinimumSize(1275, 863);
 
     this->setWindowFlag(Qt::FramelessWindowHint);
     this->setStyleSheet("QWidget { background-color: rgb(50, 8, 85) }");  //目前设置整个主窗口的背景色为紫色
 
     m_bottomWidget = new BottomWidget();
+    m_leftWidget = new LeftWidget();
 
     auto centralWidget = new QWidget(this);
     this->setCentralWidget(centralWidget);
 
-    auto vBoxLayout = new QVBoxLayout(centralWidget);
+    auto hMainLayout = new QHBoxLayout(centralWidget);
+
+    auto vBoxLayout = new QVBoxLayout();
     vBoxLayout->addStretch(1);
     vBoxLayout->addWidget(m_bottomWidget);
+
+    hMainLayout->addWidget(m_leftWidget);
+    hMainLayout->addLayout(vBoxLayout);
 
     m_player = new QMediaPlayer;
     //connect(m_player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));

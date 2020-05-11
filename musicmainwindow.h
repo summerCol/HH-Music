@@ -7,6 +7,7 @@
 #include <QMediaPlayer>
 #include <QMouseEvent>
 #include "bottomwidget.h"
+#include "leftwidget.h"
 
 class MusicMainWindow : public QMainWindow
 {
@@ -22,6 +23,7 @@ protected:
 private:
     QMediaPlayer* m_player;
     BottomWidget* m_bottomWidget;
+    LeftWidget* m_leftWidget;
     bool m_play;
     bool m_isPress;
     QPoint m_pressPoint;

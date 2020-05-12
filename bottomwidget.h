@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QToolButton>
+#include <QMouseEvent>
 
 class BottomWidget : public QWidget
 {
@@ -12,14 +13,21 @@ class BottomWidget : public QWidget
 public:
     explicit BottomWidget(QWidget *parent = nullptr);
 
-signals:
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
 
+signals:
+    void windgetMove(QPoint point);
 public:
     QPushButton* m_playBtn;
     QPushButton* m_preBtn;
     QPushButton* m_nextBtn;
     QToolButton* m_volumeBtn;
     QToolButton* m_recycleBtn;
+    bool m_isPress;
+    QPoint m_pressPoint;
 
 };
 

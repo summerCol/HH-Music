@@ -16,9 +16,9 @@ public:
     explicit MusicMainWindow(QWidget *parent = nullptr);
 
 protected:
-    void mousePressEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
+//    void mousePressEvent(QMouseEvent *event);
+//    void mouseReleaseEvent(QMouseEvent *event);
+//    void mouseMoveEvent(QMouseEvent *event);
 
 private:
     QMediaPlayer* m_player;
@@ -32,6 +32,7 @@ signals:
 
 public slots:
     void play();
+    void moveSlot(QPoint point);
 
 };
 

@@ -13,6 +13,7 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
 
     m_bottomWidget = new BottomWidget();
     m_leftWidget = new LeftWidget();
+    m_bottomWidget->setFixedWidth(this->width() - m_leftWidget->width());
 
     auto centralWidget = new QWidget(this);
     this->setCentralWidget(centralWidget);
@@ -33,6 +34,7 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     m_player->setVolume(50);
 
     connect(m_bottomWidget->m_playBtn, SIGNAL(clicked()), this, SLOT(play()));
+    connect(m_bottomWidget, SIGNAL(windgetMove(QPoint)), this, SLOT(moveSlot(QPoint)));
 }
 
 
@@ -55,6 +57,12 @@ void MusicMainWindow::play()
     m_play = !m_play;
 }
 
+void MusicMainWindow::moveSlot(QPoint point)
+{
+    move(this->pos() + point);
+}
+
+/*
 void MusicMainWindow::mousePressEvent(QMouseEvent *event)
 {
     m_isPress = true;
@@ -79,3 +87,4 @@ void MusicMainWindow::mouseMoveEvent(QMouseEvent *event)
         move(this->pos() + (event->pos() - m_pressPoint));
     }
 }
+*/

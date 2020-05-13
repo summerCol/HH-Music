@@ -6,6 +6,9 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QMouseEvent>
+#include <memory>
+
+using namespace std;
 
 class BottomWidget : public QWidget
 {
@@ -21,11 +24,11 @@ protected:
 signals:
     void windgetMove(QPoint point);
 public:
-    QPushButton* m_playBtn;
-    QPushButton* m_preBtn;
-    QPushButton* m_nextBtn;
-    QToolButton* m_volumeBtn;
-    QToolButton* m_recycleBtn;
+    unique_ptr<QPushButton> m_playBtn;
+    unique_ptr<QPushButton> m_preBtn;
+    unique_ptr<QPushButton> m_nextBtn;
+    unique_ptr<QToolButton> m_volumeBtn;
+    unique_ptr<QToolButton> m_recycleBtn;
     bool m_isPress;
     QPoint m_pressPoint;
 

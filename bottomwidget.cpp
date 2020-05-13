@@ -7,19 +7,19 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
 {
     auto hLayout = new QHBoxLayout(this);
 
-    m_recycleBtn = new QToolButton();
-    m_preBtn  = new QPushButton();
-    m_playBtn = new QPushButton();
-    m_nextBtn  = new QPushButton();
-    m_volumeBtn  = new QToolButton();
+    m_recycleBtn = unique_ptr<QToolButton>(new QToolButton());
+    m_preBtn  = unique_ptr<QPushButton>(new QPushButton());
+    m_playBtn = unique_ptr<QPushButton>(new QPushButton());
+    m_nextBtn  = unique_ptr<QPushButton>(new QPushButton());
+    m_volumeBtn  = unique_ptr<QToolButton>(new QToolButton());
 
     hLayout->addStretch(10); //这一行没注释掉中间几个按钮会偏右边（但是没添加左边Widget的时候不会，刚好是居中的）
     //hLayout->addSpacing(1);
-    hLayout->addWidget(m_recycleBtn);
-    hLayout->addWidget(m_preBtn);
-    hLayout->addWidget(m_playBtn);
-    hLayout->addWidget(m_nextBtn);
-    hLayout->addWidget(m_volumeBtn);
+    hLayout->addWidget(m_recycleBtn.get());
+    hLayout->addWidget(m_preBtn.get());
+    hLayout->addWidget(m_playBtn.get());
+    hLayout->addWidget(m_nextBtn.get());
+    hLayout->addWidget(m_volumeBtn.get());
     hLayout->addStretch(25);
 
 //    QPalette palette(QColor(50, 8, 85));

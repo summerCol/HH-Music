@@ -1,4 +1,5 @@
 QT += core multimedia widgets
+CONFIG += c++11
 
 SOURCES += \
     bottomwidget.cpp \

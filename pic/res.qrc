@@ -6,5 +6,12 @@
         <file>pre.png</file>
         <file>recycleMode.png</file>
         <file>volume.png</file>
+        <file>close.png</file>
+        <file>maximum.png</file>
+        <file>minimum.png</file>
+        <file>upNext1.png</file>
+        <file>upNext2.png</file>
+        <file>upPre1.png</file>
+        <file>upPre2.png</file>
     </qresource>
 </RCC>

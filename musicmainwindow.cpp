@@ -2,6 +2,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QDebug>
+#include <QSpacerItem>
 
 MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
                                                     m_play(false), m_isPress(false), m_pressPoint(QPoint(0, 0))
@@ -13,7 +14,9 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
 
     m_bottomWidget = new BottomWidget();
     m_leftWidget = new LeftWidget();
+    m_upperWidget = new UpperWidget();
     m_bottomWidget->setFixedWidth(this->width() - m_leftWidget->width());
+    m_upperWidget->setFixedWidth(this->width() - m_leftWidget->width());
 
     auto centralWidget = new QWidget(this);
     this->setCentralWidget(centralWidget);
@@ -21,12 +24,16 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     auto hMainLayout = new QHBoxLayout(centralWidget);
 
     auto vBoxLayout = new QVBoxLayout();
-    vBoxLayout->addStretch(1);
+    //auto spacerItem = new QSpacerItem(650, 30);
+    vBoxLayout->addWidget(m_upperWidget);
+    vBoxLayout->addStretch(150);
+    //vBoxLayout->addSpacerItem(spacerItem);
     vBoxLayout->addWidget(m_bottomWidget);
 
     hMainLayout->addWidget(m_leftWidget);
     hMainLayout->addLayout(vBoxLayout);
     hMainLayout->setMargin(0); //调整主布局的外边距
+    hMainLayout->setSpacing(0);
 
     m_player = new QMediaPlayer;
     //connect(m_player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));

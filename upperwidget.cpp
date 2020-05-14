@@ -36,7 +36,7 @@ UpperWidget::UpperWidget(QWidget *parent) : QWidget(parent)
 
     auto mainLayout = new QHBoxLayout(this);
     mainLayout->addLayout(hLayout);
-    mainLayout->addStretch(25);
+    mainLayout->addStretch();
     mainLayout->addLayout(hLayout1);
 
 }

@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QWidget>
+#include <QHBoxLayout>
 #include <QPushButton>
 #include <QToolButton>
 #include <QMouseEvent>
@@ -24,6 +25,7 @@ protected:
 signals:
     void windgetMove(QPoint point);
 public:
+    unique_ptr<QHBoxLayout> m_hLayout;
     unique_ptr<QPushButton> m_playBtn;
     unique_ptr<QPushButton> m_preBtn;
     unique_ptr<QPushButton> m_nextBtn;

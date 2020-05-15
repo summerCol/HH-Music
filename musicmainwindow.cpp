@@ -1,6 +1,4 @@
 #include "musicmainwindow.h"
-#include <QVBoxLayout>
-#include <QHBoxLayout>
 #include <QDebug>
 #include <QSpacerItem>
 
@@ -21,9 +19,9 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     auto centralWidget = new QWidget(this);
     this->setCentralWidget(centralWidget);
 
-    auto hMainLayout = new QHBoxLayout(centralWidget);
+    hMainLayout = new QHBoxLayout(centralWidget);
 
-    auto vBoxLayout = new QVBoxLayout();
+    vBoxLayout = new QVBoxLayout();
     //auto spacerItem = new QSpacerItem(650, 30);
     vBoxLayout->addWidget(m_upperWidget);
     vBoxLayout->addStretch(150);
@@ -42,6 +40,16 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
 
     connect(m_bottomWidget->m_playBtn.get(), SIGNAL(clicked()), this, SLOT(play()));
     connect(m_bottomWidget, SIGNAL(windgetMove(QPoint)), this, SLOT(moveSlot(QPoint)));
+}
+
+MusicMainWindow::~MusicMainWindow()
+{
+    delete m_player;
+    delete m_bottomWidget;
+    delete m_leftWidget;
+    delete m_upperWidget;
+    delete hMainLayout;
+    delete vBoxLayout;
 }
 
 

@@ -1,5 +1,4 @@
 #include "upperwidget.h"
-#include <QHBoxLayout>
 
 UpperWidget::UpperWidget(QWidget *parent) : QWidget(parent)
 {
@@ -19,14 +18,14 @@ UpperWidget::UpperWidget(QWidget *parent) : QWidget(parent)
                                            "background: transparent; }" );
     m_closeBtn->setStyleSheet("QPushButton{ border-image: url(:close.png);"
                                            "background: transparent; }" );
-    auto hLayout = new QHBoxLayout;
-    hLayout->addWidget(m_preBtn);
-    hLayout->addWidget(m_nextBtn);
+    m_hLayout = new QHBoxLayout;
+    m_hLayout->addWidget(m_preBtn);
+    m_hLayout->addWidget(m_nextBtn);
 
-    auto hLayout1 = new QHBoxLayout;
-    hLayout1->addWidget(m_minBtn);
-    hLayout1->addWidget(m_maxBtn);
-    hLayout1->addWidget(m_closeBtn);
+    m_hLayout1 = new QHBoxLayout;
+    m_hLayout1->addWidget(m_minBtn);
+    m_hLayout1->addWidget(m_maxBtn);
+    m_hLayout1->addWidget(m_closeBtn);
 
     m_preBtn->setFixedSize(30,30);
     m_nextBtn->setFixedSize(30,30);
@@ -34,9 +33,20 @@ UpperWidget::UpperWidget(QWidget *parent) : QWidget(parent)
     m_maxBtn->setFixedSize(30,30);
     m_closeBtn->setFixedSize(30,30);
 
-    auto mainLayout = new QHBoxLayout(this);
-    mainLayout->addLayout(hLayout);
-    mainLayout->addStretch();
-    mainLayout->addLayout(hLayout1);
+    m_mainLayout = new QHBoxLayout(this);
+    m_mainLayout->addLayout(m_hLayout);
+    m_mainLayout->addStretch();
+    m_mainLayout->addLayout(m_hLayout1);
+}
 
+UpperWidget::~UpperWidget()
+{
+    delete m_preBtn;
+    delete m_nextBtn;
+    delete m_minBtn;
+    delete m_maxBtn;
+    delete m_closeBtn;
+    delete m_hLayout;
+    delete m_hLayout1;
+    delete m_mainLayout;
 }

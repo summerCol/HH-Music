@@ -6,6 +6,8 @@
 #include <QPushButton>
 #include <QMediaPlayer>
 #include <QMouseEvent>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include "bottomwidget.h"
 #include "leftwidget.h"
 #include "upperwidget.h"
@@ -15,6 +17,7 @@ class MusicMainWindow : public QMainWindow
     Q_OBJECT
 public:
     explicit MusicMainWindow(QWidget *parent = nullptr);
+    ~MusicMainWindow();
 
 protected:
 //    void mousePressEvent(QMouseEvent *event);
@@ -26,6 +29,8 @@ private:
     BottomWidget* m_bottomWidget;
     LeftWidget* m_leftWidget;
     UpperWidget* m_upperWidget;
+    QHBoxLayout* hMainLayout;
+    QVBoxLayout* vBoxLayout;
     bool m_play;
     bool m_isPress;
     QPoint m_pressPoint;

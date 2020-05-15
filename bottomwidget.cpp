@@ -1,11 +1,10 @@
 #include "bottomwidget.h"
-#include <QHBoxLayout>
 #include <QPalette>
 #include <QColor>
 
 BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
 {
-    auto hLayout = new QHBoxLayout(this);
+    m_hLayout = unique_ptr<QHBoxLayout>(new QHBoxLayout(this));
 
     m_recycleBtn = unique_ptr<QToolButton>(new QToolButton());
     m_preBtn  = unique_ptr<QPushButton>(new QPushButton());
@@ -13,14 +12,14 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
     m_nextBtn  = unique_ptr<QPushButton>(new QPushButton());
     m_volumeBtn  = unique_ptr<QToolButton>(new QToolButton());
 
-    hLayout->addStretch(10); //这一行没注释掉中间几个按钮会偏右边（但是没添加左边Widget的时候不会，刚好是居中的）
+    m_hLayout->addStretch(10); //这一行没注释掉中间几个按钮会偏右边（但是没添加左边Widget的时候不会，刚好是居中的）
     //hLayout->addSpacing(1);
-    hLayout->addWidget(m_recycleBtn.get());
-    hLayout->addWidget(m_preBtn.get());
-    hLayout->addWidget(m_playBtn.get());
-    hLayout->addWidget(m_nextBtn.get());
-    hLayout->addWidget(m_volumeBtn.get());
-    hLayout->addStretch(25);
+    m_hLayout->addWidget(m_recycleBtn.get());
+    m_hLayout->addWidget(m_preBtn.get());
+    m_hLayout->addWidget(m_playBtn.get());
+    m_hLayout->addWidget(m_nextBtn.get());
+    m_hLayout->addWidget(m_volumeBtn.get());
+    m_hLayout->addStretch(25);
 
 //    QPalette palette(QColor(50, 8, 85));
 //    this->setPalette(palette);

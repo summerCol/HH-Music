@@ -3,7 +3,8 @@
 #include <QSpacerItem>
 
 MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
-                                                    m_play(false), m_isPress(false), m_pressPoint(QPoint(0, 0))
+                                                    m_play(false), m_isPress(false),
+                                                    m_showNormal(true), m_pressPoint(QPoint(0, 0))
 {
     setMinimumSize(1275, 863);
 
@@ -40,6 +41,9 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
 
     connect(m_bottomWidget->m_playBtn.get(), SIGNAL(clicked()), this, SLOT(play()));
     connect(m_bottomWidget, SIGNAL(windgetMove(QPoint)), this, SLOT(moveSlot(QPoint)));
+    connect(m_upperWidget->m_closeBtn, SIGNAL(clicked()), this, SLOT(close()));
+    connect(m_upperWidget->m_minBtn, SIGNAL(clicked()), this, SLOT(showMinimized()));
+    connect(m_upperWidget->m_maxBtn, SIGNAL(clicked()), this, SLOT(showMaxNormal()) );
 }
 
 MusicMainWindow::~MusicMainWindow()
@@ -75,6 +79,20 @@ void MusicMainWindow::play()
 void MusicMainWindow::moveSlot(QPoint point)
 {
     move(this->pos() + point);
+}
+
+void MusicMainWindow::showMaxNormal()
+{
+    m_showNormal = !m_showNormal;
+
+    if(m_showNormal)
+    {
+        showNormal();
+    }
+    else
+    {
+        showMaximized();
+    }
 }
 
 /*

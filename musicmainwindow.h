@@ -33,6 +33,7 @@ private:
     QVBoxLayout* vBoxLayout;
     bool m_play;
     bool m_isPress;
+    bool m_showNormal;
     QPoint m_pressPoint;
 
 signals:
@@ -40,7 +41,7 @@ signals:
 public slots:
     void play();
     void moveSlot(QPoint point);
-
+    void showMaxNormal();
 };
 
 #endif // MUSICMAINWINDOW_H

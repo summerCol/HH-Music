@@ -1,4 +1,4 @@
-QT += core multimedia widgets
+QT += core multimedia widgets multimediawidgets
 CONFIG += c++11
 
 SOURCES += \

@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QPushButton>
 #include <QMediaPlayer>
+#include <QMediaPlaylist>
+#include <QVideoWidget>
 #include <QMouseEvent>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -26,6 +28,8 @@ protected:
 
 private:
     QMediaPlayer* m_player;
+    QMediaPlaylist* m_playlist;
+    QVideoWidget* m_videoWidget;
     BottomWidget* m_bottomWidget;
     LeftWidget* m_leftWidget;
     UpperWidget* m_upperWidget;

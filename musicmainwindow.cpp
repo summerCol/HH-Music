@@ -11,11 +11,24 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     this->setWindowFlag(Qt::FramelessWindowHint);
     this->setStyleSheet("QWidget { background-color: rgb(50, 8, 85) }");  //目前设置整个主窗口的背景色为紫色
 
+    m_videoWidget = new QVideoWidget();
+    m_player = new QMediaPlayer;
+    m_playlist = new QMediaPlaylist(m_player);
+    //m_playlist->addMedia(QUrl::fromLocalFile("D:\\ProjectCode\\HH-Music\\music\\玄觞 - 黯然销魂.mp3" ));
+    m_playlist->addMedia(QUrl::fromLocalFile("D:\\ProjectCode\\HH-Music\\music\\zj.mp4" ));
+    m_player->setPlaylist(m_playlist);
+    //connect(m_player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
+    //m_player->setMedia(QUrl::fromLocalFile("D:\\ProjectCode\\HH-Music\\music\\玄觞 - 黯然销魂.mp3" ));
+    //m_widgetContainVideo->setMinimumSize(500,400);
+    //m_player->setVolume(50);
+
+
     m_bottomWidget = new BottomWidget();
     m_leftWidget = new LeftWidget();
     m_upperWidget = new UpperWidget();
-    m_bottomWidget->setFixedWidth(this->width() - m_leftWidget->width());
-    m_upperWidget->setFixedWidth(this->width() - m_leftWidget->width());
+    m_leftWidget->setMinimumWidth(260);
+    //m_bottomWidget->setFixedWidth(this->width() - m_leftWidget->width());
+    //m_upperWidget->setFixedWidth(this->width() - m_leftWidget->width());
 
     auto centralWidget = new QWidget(this);
     this->setCentralWidget(centralWidget);
@@ -25,7 +38,9 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     vBoxLayout = new QVBoxLayout();
     //auto spacerItem = new QSpacerItem(650, 30);
     vBoxLayout->addWidget(m_upperWidget);
-    vBoxLayout->addStretch(150);
+    //vBoxLayout->addStretch(150);
+    //m_widgetContainVideo->setLayout(vBoxLayout);
+    vBoxLayout->addWidget(m_videoWidget);
     //vBoxLayout->addSpacerItem(spacerItem);
     vBoxLayout->addWidget(m_bottomWidget);
 
@@ -34,10 +49,14 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     hMainLayout->setMargin(0); //调整主布局的外边距
     hMainLayout->setSpacing(0);
 
-    m_player = new QMediaPlayer;
-    //connect(m_player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
-    m_player->setMedia(QUrl::fromLocalFile("D:\\ProjectCode\\HH-Music\\music\\玄觞 - 黯然销魂.mp3" ));
-    m_player->setVolume(50);
+
+    //m_videoWidget->setMinimumSize(500,400);
+    m_player->setVideoOutput(m_videoWidget);
+    //m_playlist->setCurrentIndex(0);
+    //m_videoWidget->show();
+    m_player->play(); //不能播放的花可能是因为没装LAVFilters，、
+                      //报错DirectShowPlayerService::doRender: Unresolved error code 0x80040266
+
 
     connect(m_bottomWidget->m_playBtn.get(), SIGNAL(clicked()), this, SLOT(play()));
     connect(m_bottomWidget, SIGNAL(windgetMove(QPoint)), this, SLOT(moveSlot(QPoint)));
@@ -49,6 +68,8 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
 MusicMainWindow::~MusicMainWindow()
 {
     delete m_player;
+    delete m_playlist;
+    delete m_videoWidget;
     delete m_bottomWidget;
     delete m_leftWidget;
     delete m_upperWidget;

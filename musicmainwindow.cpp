@@ -19,16 +19,15 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     m_player->setPlaylist(m_playlist);
     //connect(m_player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
     //m_player->setMedia(QUrl::fromLocalFile("D:\\ProjectCode\\HH-Music\\music\\玄觞 - 黯然销魂.mp3" ));
-    //m_widgetContainVideo->setMinimumSize(500,400);
     //m_player->setVolume(50);
 
 
     m_bottomWidget = new BottomWidget();
     m_leftWidget = new LeftWidget();
     m_upperWidget = new UpperWidget();
-    m_leftWidget->setMinimumWidth(260);
-    //m_bottomWidget->setFixedWidth(this->width() - m_leftWidget->width());
-    //m_upperWidget->setFixedWidth(this->width() - m_leftWidget->width());
+    m_leftWidget->setFixedWidth(262);
+    m_bottomWidget->setFixedHeight(90);
+    m_upperWidget->setFixedHeight(90);
 
     auto centralWidget = new QWidget(this);
     this->setCentralWidget(centralWidget);
@@ -36,12 +35,8 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     hMainLayout = new QHBoxLayout(centralWidget);
 
     vBoxLayout = new QVBoxLayout();
-    //auto spacerItem = new QSpacerItem(650, 30);
     vBoxLayout->addWidget(m_upperWidget);
-    //vBoxLayout->addStretch(150);
-    //m_widgetContainVideo->setLayout(vBoxLayout);
     vBoxLayout->addWidget(m_videoWidget);
-    //vBoxLayout->addSpacerItem(spacerItem);
     vBoxLayout->addWidget(m_bottomWidget);
 
     hMainLayout->addWidget(m_leftWidget);
@@ -50,10 +45,7 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     hMainLayout->setSpacing(0);
 
 
-    //m_videoWidget->setMinimumSize(500,400);
     m_player->setVideoOutput(m_videoWidget);
-    //m_playlist->setCurrentIndex(0);
-    //m_videoWidget->show();
     m_player->play(); //不能播放的花可能是因为没装LAVFilters，、
                       //报错DirectShowPlayerService::doRender: Unresolved error code 0x80040266
 

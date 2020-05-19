@@ -77,3 +77,9 @@ void UpperWidget::mouseMoveEvent(QMouseEvent *event)
         emit windgetMove(tmp);
     }
 }
+
+void UpperWidget::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event);
+    emit doubleClick();
+}

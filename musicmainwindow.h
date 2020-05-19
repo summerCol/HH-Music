@@ -21,11 +21,6 @@ public:
     explicit MusicMainWindow(QWidget *parent = nullptr);
     ~MusicMainWindow();
 
-protected:
-//    void mousePressEvent(QMouseEvent *event);
-//    void mouseReleaseEvent(QMouseEvent *event);
-//    void mouseMoveEvent(QMouseEvent *event);
-
 private:
     QMediaPlayer* m_player;
     QMediaPlaylist* m_playlist;

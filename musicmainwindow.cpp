@@ -59,6 +59,7 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
 
 
     connect(m_bottomWidget->m_playBtn.get(), SIGNAL(clicked()), this, SLOT(play()));
+    connect(m_upperWidget, SIGNAL(windgetMove(QPoint)), this, SLOT(moveSlot(QPoint)));
     connect(m_bottomWidget, SIGNAL(windgetMove(QPoint)), this, SLOT(moveSlot(QPoint)));
     connect(m_upperWidget->m_closeBtn, SIGNAL(clicked()), this, SLOT(close()));
     connect(m_upperWidget->m_minBtn, SIGNAL(clicked()), this, SLOT(showMinimized()));

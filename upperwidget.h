@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QWidget>
+#include <QMouseEvent>
 #include <QPushButton>
 #include <QHBoxLayout>
 
@@ -13,7 +14,13 @@ public:
     explicit UpperWidget(QWidget *parent = nullptr);
     ~UpperWidget();
 
+protected:
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+
 signals:
+    void windgetMove(QPoint);
 
 public:
     QPushButton* m_preBtn;
@@ -24,6 +31,10 @@ public:
     QHBoxLayout* m_hLayout;
     QHBoxLayout* m_hLayout1;
     QHBoxLayout* m_mainLayout;
+
+private:
+    bool m_isPress;
+    QPoint m_pressPoint;
 };
 
 #endif // UPPERWIDGET_H

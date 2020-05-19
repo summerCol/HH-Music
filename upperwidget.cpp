@@ -50,3 +50,30 @@ UpperWidget::~UpperWidget()
     delete m_hLayout1;
     delete m_mainLayout;
 }
+
+void UpperWidget::mousePressEvent(QMouseEvent *event)
+{
+    m_isPress = true;
+    m_pressPoint = event->pos();
+}
+
+void UpperWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+    Q_UNUSED(event);
+    m_isPress = false;
+}
+
+void UpperWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    //qDebug() << "EVENT POS IS:"<< event->pos() << endl;
+    //qDebug() << "this POS IS:"<< this->pos() << endl;
+    //this->pos() 返回的是窗体在系统屏幕坐标系的位置坐标
+    //event->pos() 返回的是在本窗体坐标系中的位置坐标
+    //event->pos() - m_pressPoint 返回点击作用点与当前移动到的点相对本窗体坐标的一个偏移向量，如果点击作用点在原点则便宜向量为（0， 0）
+    QPoint tmp = event->pos() - m_pressPoint;
+    if(m_isPress)
+    {
+        //move(this->pos() + tmp);
+        emit windgetMove(tmp);
+    }
+}

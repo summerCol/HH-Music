@@ -19,7 +19,7 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
     m_hLayout->addWidget(m_playBtn.get());
     m_hLayout->addWidget(m_nextBtn.get());
     m_hLayout->addWidget(m_volumeBtn.get());
-    m_hLayout->addStretch(25);
+    m_hLayout->addStretch(10);  //bottomwidget layout will be compact to middle(if set 25 will compact to left)
 
 //    QPalette palette(QColor(50, 8, 85));
 //    this->setPalette(palette);

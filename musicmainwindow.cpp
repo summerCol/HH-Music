@@ -17,7 +17,7 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     //m_playlist->addMedia(QUrl::fromLocalFile("D:\\ProjectCode\\HH-Music\\music\\玄觞 - 黯然销魂.mp3" ));
     m_playlist->addMedia(QUrl::fromLocalFile("D:\\ProjectCode\\HH-Music\\music\\zj.mp4" ));
     m_player->setPlaylist(m_playlist);
-    //connect(m_player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
+    connect(m_player, SIGNAL(positionChanged(qint64)), this, SLOT(positionChanged(qint64)));
     //m_player->setMedia(QUrl::fromLocalFile("D:\\ProjectCode\\HH-Music\\music\\玄觞 - 黯然销魂.mp3" ));
     //m_player->setVolume(50);
 
@@ -108,4 +108,11 @@ void MusicMainWindow::showMaxNormal()
     {
         showMaximized();
     }
+}
+
+void MusicMainWindow::positionChanged(qint64 ms)
+{
+    //qDebug() << __FUNCTION__ << ms << endl;
+    //qDebug() << __FUNCTION__ << "duration is:" <<m_player->duration() << endl;
+    m_bottomWidget->m_progressSlider->setSliderPosition(static_cast<double>(ms)/m_player->duration()*100);
 }

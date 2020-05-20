@@ -41,6 +41,7 @@ public slots:
     void play();
     void moveSlot(QPoint point);
     void showMaxNormal();
+    void positionChanged(qint64 ms);
 };
 
 #endif // MUSICMAINWINDOW_H

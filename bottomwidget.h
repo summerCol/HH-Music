@@ -34,7 +34,7 @@ public:
     unique_ptr<QPushButton> m_nextBtn;
     unique_ptr<QToolButton> m_volumeBtn;
     unique_ptr<QToolButton> m_recycleBtn;
-    unique_ptr<QSlider> m_volumeSlider;
+    unique_ptr<QSlider> m_progressSlider;
     bool m_isPress;
     QPoint m_pressPoint;
 

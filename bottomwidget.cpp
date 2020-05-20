@@ -4,13 +4,15 @@
 
 BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
 {
-    m_hLayout = unique_ptr<QHBoxLayout>(new QHBoxLayout(this));
+    m_hLayout = unique_ptr<QHBoxLayout>(new QHBoxLayout());
+    m_vLayout = unique_ptr<QVBoxLayout>(new QVBoxLayout(this));
 
     m_recycleBtn = unique_ptr<QToolButton>(new QToolButton());
     m_preBtn  = unique_ptr<QPushButton>(new QPushButton());
     m_playBtn = unique_ptr<QPushButton>(new QPushButton());
     m_nextBtn  = unique_ptr<QPushButton>(new QPushButton());
     m_volumeBtn  = unique_ptr<QToolButton>(new QToolButton());
+    m_volumeSlider = unique_ptr<QSlider>(new QSlider(Qt::Horizontal));
 
     m_hLayout->addStretch(10); //这一行没注释掉中间几个按钮会偏右边（但是没添加左边Widget的时候不会，刚好是居中的）
     //hLayout->addSpacing(1);
@@ -20,6 +22,10 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
     m_hLayout->addWidget(m_nextBtn.get());
     m_hLayout->addWidget(m_volumeBtn.get());
     m_hLayout->addStretch(10);  //bottomwidget layout will be compact to middle(if set 25 will compact to left)
+
+
+    m_vLayout->addWidget(m_volumeSlider.get());
+    m_vLayout->addLayout(m_hLayout.get());
 
 //    QPalette palette(QColor(50, 8, 85));
 //    this->setPalette(palette);
@@ -45,6 +51,28 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
     m_volumeBtn->setFixedSize(40,30);
     m_volumeBtn->setStyleSheet("QToolButton{ border-image: url(:volume.png);"
                                            "background: transparent; }" );
+
+    m_volumeSlider->setStyleSheet("  QSlider::groove:horizontal { "
+                                  "border: 1px solid #999999; "
+                                  "height: 1px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */ "
+                                  "background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4); "
+                                  "margin: 1px 0; "
+                              "} "
+
+                              "QSlider::handle:horizontal { "
+                                  "background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 #b4b4b4, stop:1 #8f8f8f); "
+                                  "border: 2px solid rgb(167, 120, 254); "
+                                  "width: 12px; "
+                                  "margin: -2px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */ "
+                                  "border-radius: 3px; "
+                              "}"
+                              "QSlider::add-page:horizontal { "
+                                  "background: rgb(93, 61, 117); "
+                              "} "
+
+                              "QSlider::sub-page:horizontal { "
+                                  "background: rgb(167, 120, 254);"
+                              "}");
 }
 
 void BottomWidget::mousePressEvent(QMouseEvent *event)

@@ -3,7 +3,7 @@
 #include "bottomwidget.h"
 #include "leftwidget.h"
 #include "upperwidget.h"
-
+#include "volumewidget.h"
 
 
 int main(int argc, char** argv)
@@ -18,6 +18,8 @@ int main(int argc, char** argv)
 //    leftWidget.show();
 //    UpperWidget uppperWidget;
 //    uppperWidget.show();
+//    VolumeWidget volumeWidget;
+//    volumeWidget.show();
 
     return a.exec();  //开启应用事件循环
 }

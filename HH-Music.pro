@@ -6,13 +6,15 @@ SOURCES += \
     leftwidget.cpp \
     main.cpp \
     musicmainwindow.cpp \
-    upperwidget.cpp
+    upperwidget.cpp \
+    volumewidget.cpp
 
 HEADERS += \
     bottomwidget.h \
     leftwidget.h \
     musicmainwindow.h \
-    upperwidget.h
+    upperwidget.h \
+    volumewidget.h
 
 RESOURCES += \
     pic/res.qrc

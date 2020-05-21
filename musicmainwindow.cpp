@@ -120,13 +120,14 @@ void MusicMainWindow::showVolumeWidget()
 
     if(m_showVolumeWidget)
     {
+        //m_volumeWidget->move(QCursor::pos());  //??? how to let it above the volume button
         m_volumeWidget->show();
     }
     else
     {
         m_volumeWidget->hide();
     }
-    //m_volumeWidget->move(m_bottomWidget->m_volumeBtn->pos());
+
 }
 
 

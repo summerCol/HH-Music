@@ -13,6 +13,7 @@
 #include "bottomwidget.h"
 #include "leftwidget.h"
 #include "upperwidget.h"
+#include "volumewidget.h"
 
 class MusicMainWindow : public QMainWindow
 {
@@ -28,11 +29,13 @@ private:
     BottomWidget* m_bottomWidget;
     LeftWidget* m_leftWidget;
     UpperWidget* m_upperWidget;
+    VolumeWidget* m_volumeWidget;
     QHBoxLayout* hMainLayout;
     QVBoxLayout* vBoxLayout;
     bool m_play;
     bool m_isPress;
     bool m_showNormal;
+    bool m_showVolumeWidget;
     QPoint m_pressPoint;
 
 signals:
@@ -42,6 +45,7 @@ public slots:
     void moveSlot(QPoint point);
     void showMaxNormal();
     void positionChanged(qint64 ms);
+    void showVolumeWidget();
 };
 
 #endif // MUSICMAINWINDOW_H

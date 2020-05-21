@@ -3,6 +3,7 @@
 VolumeWidget::VolumeWidget(QWidget *parent) : QWidget(parent)
 {
     this->setFixedSize(90, 300);
+    this->setWindowFlag(Qt::FramelessWindowHint);
 
     m_volumeSlider = unique_ptr<QSlider>(new QSlider(Qt::Vertical));
     m_vLayout = unique_ptr<QVBoxLayout>(new QVBoxLayout(this));

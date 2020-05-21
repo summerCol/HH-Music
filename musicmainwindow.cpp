@@ -4,7 +4,8 @@
 
 MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
                                                     m_play(false), m_isPress(false),
-                                                    m_showNormal(true), m_pressPoint(QPoint(0, 0))
+                                                    m_showNormal(true), m_showVolumeWidget(false),
+                                                    m_pressPoint(QPoint(0, 0))
 {
     setMinimumSize(1275, 863);
 
@@ -25,6 +26,7 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     m_bottomWidget = new BottomWidget();
     m_leftWidget = new LeftWidget();
     m_upperWidget = new UpperWidget();
+    m_volumeWidget = new VolumeWidget();
     m_leftWidget->setFixedWidth(262);
     m_bottomWidget->setFixedHeight(90);
     m_upperWidget->setFixedHeight(90);
@@ -56,7 +58,8 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     connect(m_bottomWidget, SIGNAL(windgetMove(QPoint)), this, SLOT(moveSlot(QPoint)));
     connect(m_upperWidget->m_closeBtn, SIGNAL(clicked()), this, SLOT(close()));
     connect(m_upperWidget->m_minBtn, SIGNAL(clicked()), this, SLOT(showMinimized()));
-    connect(m_upperWidget->m_maxBtn, SIGNAL(clicked()), this, SLOT(showMaxNormal()) );
+    connect(m_upperWidget->m_maxBtn, SIGNAL(clicked()), this, SLOT(showMaxNormal()));
+    connect(m_bottomWidget->m_volumeBtn.get(), SIGNAL(clicked()), this, SLOT(showVolumeWidget()));
 }
 
 MusicMainWindow::~MusicMainWindow()
@@ -66,6 +69,7 @@ MusicMainWindow::~MusicMainWindow()
     delete m_videoWidget;
     delete m_bottomWidget;
     delete m_leftWidget;
+    delete m_volumeWidget;
     delete m_upperWidget;
     delete hMainLayout;
     delete vBoxLayout;
@@ -109,6 +113,22 @@ void MusicMainWindow::showMaxNormal()
         showMaximized();
     }
 }
+
+void MusicMainWindow::showVolumeWidget()
+{
+    m_showVolumeWidget = !m_showVolumeWidget;
+
+    if(m_showVolumeWidget)
+    {
+        m_volumeWidget->show();
+    }
+    else
+    {
+        m_volumeWidget->hide();
+    }
+    //m_volumeWidget->move(m_bottomWidget->m_volumeBtn->pos());
+}
+
 
 void MusicMainWindow::positionChanged(qint64 ms)
 {

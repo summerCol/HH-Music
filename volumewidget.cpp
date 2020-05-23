@@ -11,6 +11,8 @@ VolumeWidget::VolumeWidget(QWidget *parent) : QWidget(parent)
     m_hLayout2 = unique_ptr<QHBoxLayout>(new QHBoxLayout());
     m_volumeBtn = unique_ptr<QPushButton>(new QPushButton());
 
+    m_volumeSlider->setRange(0, 100); //because QMediaPlayer is ranging from 0 (silence) to 100 (full volume).
+
     m_hLayout1->addWidget(m_volumeSlider.get());
     m_hLayout2->addWidget(m_volumeBtn.get());
 

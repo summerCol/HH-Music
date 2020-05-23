@@ -51,6 +51,9 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     m_player->play(); //不能播放的花可能是因为没装LAVFilters，、
                       //报错DirectShowPlayerService::doRender: Unresolved error code 0x80040266
 
+    m_player->setVolume(0);
+    m_volumeWidget->m_volumeSlider->setValue(m_player->volume());
+
 
     connect(m_bottomWidget->m_playBtn.get(), SIGNAL(clicked()), this, SLOT(play()));
     connect(m_upperWidget, SIGNAL(windgetMove(QPoint)), this, SLOT(moveSlot(QPoint)));
@@ -60,6 +63,7 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     connect(m_upperWidget->m_minBtn, SIGNAL(clicked()), this, SLOT(showMinimized()));
     connect(m_upperWidget->m_maxBtn, SIGNAL(clicked()), this, SLOT(showMaxNormal()));
     connect(m_bottomWidget->m_volumeBtn.get(), SIGNAL(clicked()), this, SLOT(showVolumeWidget()));
+    connect(m_volumeWidget->m_volumeSlider.get(), SIGNAL(valueChanged(int)), m_player, SLOT(setVolume(int)));
 }
 
 MusicMainWindow::~MusicMainWindow()

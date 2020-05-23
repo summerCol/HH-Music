@@ -62,7 +62,8 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     connect(m_upperWidget->m_closeBtn, SIGNAL(clicked()), this, SLOT(close()));
     connect(m_upperWidget->m_minBtn, SIGNAL(clicked()), this, SLOT(showMinimized()));
     connect(m_upperWidget->m_maxBtn, SIGNAL(clicked()), this, SLOT(showMaxNormal()));
-    connect(m_bottomWidget->m_volumeBtn.get(), SIGNAL(clicked()), this, SLOT(showVolumeWidget()));
+    connect(m_bottomWidget->m_volumeBtn.get(), SIGNAL(clicked()), m_bottomWidget, SLOT(volumeBtnSlot()));
+    connect(m_bottomWidget, SIGNAL(clickPos(QPoint)), this, SLOT(showVolumeWidget(QPoint)));
     connect(m_volumeWidget->m_volumeSlider.get(), SIGNAL(valueChanged(int)), m_player, SLOT(setVolume(int)));
 }
 
@@ -118,13 +119,21 @@ void MusicMainWindow::showMaxNormal()
     }
 }
 
-void MusicMainWindow::showVolumeWidget()
+void MusicMainWindow::showVolumeWidget(QPoint pos)
 {
+    //QPoint volumePos = pos + QPoint(0, m_volumeWidget->height());
+    //pos.x() - m_volumeWidget->width()/4 是个目测估计值，可以再优化
+    QPoint volumePos = QPoint(pos.x() - m_volumeWidget->width()/4, pos.y() - m_volumeWidget->height());
+
     m_showVolumeWidget = !m_showVolumeWidget;
 
     if(m_showVolumeWidget)
     {
+        //qDebug() << "m_bottomWidget->m_volumeBtn->pos is :" <<  m_bottomWidget->m_volumeBtn->pos() << endl;
+        //qDebug() << "m_bottomWidget->m_volumeBtn->pos is :" <<  mapToGlobal( m_bottomWidget->m_volumeBtn->pos() ) << endl;
+        //qDebug() << "m_bottomWidget->m_volumeBtn->pos is :" <<  mapToGlobal( m_bottomWidget->mapToParent( m_bottomWidget->m_volumeBtn->pos()) ) << endl;
         //m_volumeWidget->move(QCursor::pos());  //??? how to let it above the volume button
+        m_volumeWidget->move(volumePos);
         m_volumeWidget->show();
     }
     else

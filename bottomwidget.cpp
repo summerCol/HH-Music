@@ -1,6 +1,7 @@
 #include "bottomwidget.h"
 #include <QPalette>
 #include <QColor>
+#include <QDebug>
 
 BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
 {
@@ -75,6 +76,8 @@ BottomWidget::BottomWidget(QWidget *parent) : QWidget(parent)
                               "QSlider::sub-page:horizontal { "
                                   "background: rgb(167, 120, 254);"
                               "}");
+
+    connect(m_volumeBtn.get(), SIGNAL(click()), this, SLOT(volumeBtnSlot()));
 }
 
 void BottomWidget::mousePressEvent(QMouseEvent *event)
@@ -102,4 +105,13 @@ void BottomWidget::mouseMoveEvent(QMouseEvent *event)
         //move(this->pos() + tmp);
         emit windgetMove(tmp);
     }
+}
+
+void BottomWidget::volumeBtnSlot()
+{
+    QPoint point;
+
+    point = mapToGlobal(m_volumeBtn->pos());
+
+    emit clickPos(point);
 }

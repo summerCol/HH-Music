@@ -26,6 +26,7 @@ protected:
 
 signals:
     void windgetMove(QPoint point);
+    void clickPos(QPoint);
 public:
     unique_ptr<QHBoxLayout> m_hLayout;
     unique_ptr<QVBoxLayout> m_vLayout;
@@ -37,6 +38,9 @@ public:
     unique_ptr<QSlider> m_progressSlider;
     bool m_isPress;
     QPoint m_pressPoint;
+
+public slots:
+   void volumeBtnSlot();
 
 };
 

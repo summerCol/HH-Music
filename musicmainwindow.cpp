@@ -70,6 +70,14 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     connect(m_bottomWidget->m_volumeBtn.get(), SIGNAL(clicked()), m_bottomWidget, SLOT(volumeBtnSlot()));
     connect(m_bottomWidget, SIGNAL(clickPos(QPoint)), this, SLOT(showVolumeWidget(QPoint)));
     connect(m_volumeWidget->m_volumeSlider.get(), SIGNAL(valueChanged(int)), m_player, SLOT(setVolume(int)));
+    connect(m_bottomWidget->m_progressSlider.get(), SIGNAL(sliderReleased()), this, SLOT(setPlayerPosition()));
+    //connect(m_bottomWidget->m_progressSlider.get(), SIGNAL(sliderPressed()), this, SLOT(setPlayerPosition()));
+}
+
+void MusicMainWindow::setPlayerPosition()
+{
+    qint64 pos = m_bottomWidget->m_progressSlider->value();
+    m_player->setPosition(pos * m_player->duration()/100);
 }
 
 MusicMainWindow::~MusicMainWindow()

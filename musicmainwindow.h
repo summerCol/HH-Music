@@ -46,6 +46,7 @@ public slots:
     void showMaxNormal();
     void positionChanged(qint64 ms);
     void showVolumeWidget(QPoint pos);
+    void setPlayerPosition();
 
 protected:
     bool eventFilter(QObject* obj, QEvent* ev);

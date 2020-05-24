@@ -46,6 +46,9 @@ public slots:
     void showMaxNormal();
     void positionChanged(qint64 ms);
     void showVolumeWidget(QPoint pos);
+
+protected:
+    bool eventFilter(QObject* obj, QEvent* ev);
 };
 
 #endif // MUSICMAINWINDOW_H

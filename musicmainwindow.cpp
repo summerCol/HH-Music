@@ -54,6 +54,11 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     m_player->setVolume(0);
     m_volumeWidget->m_volumeSlider->setValue(m_player->volume());
 
+    m_upperWidget->installEventFilter(this);
+    m_bottomWidget->installEventFilter(this);
+    m_leftWidget->installEventFilter(this);
+    m_videoWidget->installEventFilter(this);
+
 
     connect(m_bottomWidget->m_playBtn.get(), SIGNAL(clicked()), this, SLOT(play()));
     connect(m_upperWidget, SIGNAL(windgetMove(QPoint)), this, SLOT(moveSlot(QPoint)));
@@ -150,3 +155,16 @@ void MusicMainWindow::positionChanged(qint64 ms)
     //qDebug() << __FUNCTION__ << "duration is:" <<m_player->duration() << endl;
     m_bottomWidget->m_progressSlider->setSliderPosition(static_cast<double>(ms)/m_player->duration()*100);
 }
+
+bool MusicMainWindow::eventFilter(QObject* obj, QEvent* ev)
+{
+    if(ev->type() == QEvent::MouseButtonPress)
+    {
+        m_showVolumeWidget = false;
+        m_volumeWidget->hide();
+        return false;
+    }
+
+    return QMainWindow::eventFilter(obj, ev);
+}
+

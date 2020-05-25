@@ -10,6 +10,7 @@
 #include <QMouseEvent>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QMenu>
 #include "bottomwidget.h"
 #include "leftwidget.h"
 #include "upperwidget.h"
@@ -32,6 +33,7 @@ private:
     VolumeWidget* m_volumeWidget;
     QHBoxLayout* hMainLayout;
     QVBoxLayout* vBoxLayout;
+    QMenu* m_modeMenu;
     bool m_play;
     bool m_isPress;
     bool m_showNormal;
@@ -47,9 +49,13 @@ public slots:
     void positionChanged(qint64 ms);
     void showVolumeWidget(QPoint pos);
     void setPlayerPosition();
+    void showMenu();
 
 protected:
     bool eventFilter(QObject* obj, QEvent* ev);
+
+private:
+    void createMenu();
 };
 
 #endif // MUSICMAINWINDOW_H

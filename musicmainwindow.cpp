@@ -9,6 +9,7 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
 {
     setMinimumSize(1275, 863);
 
+    this->createMenu();
     this->setWindowFlag(Qt::FramelessWindowHint);
     this->setStyleSheet("QWidget { background-color: rgb(50, 8, 85) }");  //目前设置整个主窗口的背景色为紫色
 
@@ -72,12 +73,18 @@ MusicMainWindow::MusicMainWindow(QWidget *parent) : QMainWindow(parent),
     connect(m_volumeWidget->m_volumeSlider.get(), SIGNAL(valueChanged(int)), m_player, SLOT(setVolume(int)));
     connect(m_bottomWidget->m_progressSlider.get(), SIGNAL(sliderReleased()), this, SLOT(setPlayerPosition()));
     //connect(m_bottomWidget->m_progressSlider.get(), SIGNAL(sliderPressed()), this, SLOT(setPlayerPosition()));
+    connect(m_bottomWidget->m_recycleBtn.get(), SIGNAL(clicked()), this, SLOT(showMenu()));
 }
 
 void MusicMainWindow::setPlayerPosition()
 {
     qint64 pos = m_bottomWidget->m_progressSlider->value();
     m_player->setPosition(pos * m_player->duration()/100);
+}
+
+void MusicMainWindow::showMenu()
+{
+    m_modeMenu->exec(QCursor::pos());
 }
 
 MusicMainWindow::~MusicMainWindow()
@@ -91,8 +98,17 @@ MusicMainWindow::~MusicMainWindow()
     delete m_upperWidget;
     delete hMainLayout;
     delete vBoxLayout;
+    delete m_modeMenu;
 }
 
+void MusicMainWindow::createMenu()
+{
+    m_modeMenu = new QMenu;
+    m_modeMenu->addAction(tr("随机播放"));
+    m_modeMenu->addAction(tr("顺序播放"));
+    m_modeMenu->addAction(tr("单曲循环"));
+    m_modeMenu->addAction(tr("列表循环"));
+}
 
 void MusicMainWindow::play()
 {
